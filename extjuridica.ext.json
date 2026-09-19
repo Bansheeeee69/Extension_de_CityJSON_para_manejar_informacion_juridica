@@ -1,0 +1,588 @@
+{
+    "type": "CityJSONExtension",
+    "name": "LADMCOL_Catastro",
+    "description": "Extension de CityJSON para manejar información jurídica catastral conforme al Modelo Extendido LADM_COL Catastro-Registro v4.1",
+    "url": "https://raw.githubusercontent.com/Bansheeeee69/Extension_de_CityJSON_para_manejar_informacion_juridica/refs/heads/master/extjuridica.ext.json",
+    "version": "1.0",
+    "versionCityJSON": "2.0",
+    "extraAttributes": {},
+    "extraRootProperties": {},
+    "extraSemanticSurfaces": {},
+    "extraCityObjects": {
+        "+CR_Predio": {
+            "allOf": [
+                {
+                    "$ref": "cityobjects.schema.json#/_AbstractCityObject"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "+CR_Predio"
+                            ]
+                        },
+                        "attributes": {
+                            "type": "object",
+                            "properties": {
+                                "Departamento": {
+                                    "type": "string",
+                                    "description": "Corresponde al código del departamento al cual pertenece el predio. Es asignado por DIVIPOLA y tiene 2 dígitos.",
+                                    "maxLength": 2
+                                },
+                                "Municipio": {
+                                    "type": "string",
+                                    "description": "Corresponde al código del municipio al cual pertenece el predio. Es asignado por DIVIPOLA y tiene 3 dígitos.",
+                                    "maxLength": 3
+                                },
+                                "Codigo_ORIP": {
+                                    "type": "string",
+                                    "description": "Cifras distintivas de la oficina de registro, a la cual pertenece la matrícula inmobiliaria.",
+                                    "maxLength": 4
+                                },
+                                "Matricula_Inmobiliaria": {
+                                    "type": "number",
+                                    "description": "Folio destinado a la inscripción de los actos, contratos y providencias relacionados en el artículo 4° de la Ley 1579 de 2012 “Por la cual se expide el estatuto de registro de instrumentos públicos y se dictan otras disposiciones”, referente a un bien raíz, el cual se distinguirá con un código alfanumérico o complejo numeral indicativo del orden interno de cada oficina de registro y de la sucesión en que se vaya sentando."
+                                },
+                                "Numero_Predial_Nacional": {
+                                    "type": "string",
+                                    "description": "Código numérico de treinta (30) dígitos, que se le asigna a cada predio para su identificación en la base de datos catastral de acuerdo con la estructura definida por el IGAC.",
+                                    "maxLength": 30
+                                },
+                                "Codigo_Homologado": {
+                                    "type": "string",
+                                    "description": "Código único para identificar los inmuebles en los sistemas de información catastral que se utiliza para efectos de la interrelación catastro-registro, el cual es entregado por el IGAC a los gestores catastrales para su correspondiente asignación.",
+                                    "maxLength": 11
+                                },
+                                "NUPRE": {
+                                    "type": "string",
+                                    "description": "Código único para identificar los predios tanto en los sistemas de información catastral como registral. El NUPRE se obtiene a partir del código homologado de identificación predial una vez efectuada la interrelación de la base catastral con la registral. No implicará la supresión del número predial nacional ni la matrícula inmobiliaria actual.",
+                                    "maxLength": 11
+                                },
+                                "Area_Catastral_Terreno": {
+                                    "type": "number",
+                                    "description": "Área del terreno inscrita en la base de datos catastral, de conformidad con el artículo 5.2.3. de la Resolución 1040 de 2023."
+                                },
+                                "Area_Registral_M2": {
+                                    "type": "number",
+                                    "description": "Área consignada en el certificado de tradición y libertad, en la descripción de cabida y linderos o en los títulos registrados, expresada en metros cuadrados."
+                                },
+                                "Direccion": {
+                                    "description": "Dirección o direcciones del predio. Debe tener al menos una.",
+                                    "type": "array",
+                                    "minItems": 1,
+                                    "items": {
+                                        "description": "Estructura de dirección según ExtDireccion",
+                                        "type": "object",
+                                        "properties": {
+                                            "Tipo_Direccion": {
+                                                "description": "Estructurada o No Estructurada",
+                                                "type": "string",
+                                                "enum": [
+                                                    "Estructurada",
+                                                    "No_Estructurada"
+                                                ]
+                                            },
+                                            "Es_Direccion_Principal": {
+                                                "description": "Valor Booleano para distinguir si la dirección es principal",
+                                                "type": "boolean"
+                                            },
+                                            "Localizacion": {
+                                                "description": "Par de valores georreferenciados (x,y) en la que se encuentra la dirección",
+                                                "type": "object",
+                                                "properties": {
+                                                    "x": {
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "type": "number"
+                                                    },
+                                                    "z": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "x",
+                                                    "y"
+                                                ]
+                                            },
+                                            "Codigo_Postal": {
+                                                "description": "Código postal",
+                                                "type": "string",
+                                                "maxLength": 6
+                                            },
+                                            "Clase_Via_Principal": {
+                                                "description": "Clase de la vía principal",
+                                                "type": "string",
+                                                "enum": [
+                                                    "Avenida_Calle",
+                                                    "Avenida_Carrera",
+                                                    "Avenida",
+                                                    "Autopista",
+                                                    "Circunvalar",
+                                                    "Calle",
+                                                    "Carrera",
+                                                    "Diagonal",
+                                                    "Transversal",
+                                                    "Circular"
+                                                ]
+                                            },
+                                            "Valor_Via_Principal": {
+                                                "description": "Número que acompaña a la clase de vía principal",
+                                                "type": "string",
+                                                "maxLength": 100
+                                            },
+                                            "Letra_Via_Principal": {
+                                                "description": "Letra que acompaña al valor de la vía principal",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            },
+                                            "Sector_Ciudad": {
+                                                "description": "Sector de la ciudad",
+                                                "type": "string",
+                                                "enum": [
+                                                    "Norte",
+                                                    "Sur",
+                                                    "Este",
+                                                    "Oeste"
+                                                ]
+                                            },
+                                            "Valor_Via_Generadora": {
+                                                "description": "Número de la vía generadora",
+                                                "type": "string",
+                                                "maxLength": 100
+                                            },
+                                            "Letra_Via_Generadora": {
+                                                "description": "Letra que acompaña al valor de la vía generadora",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            },
+                                            "Numero_Predio": {
+                                                "description": "Distancia entre la vía generadora al acceso del predio",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            },
+                                            "Sector_Predio": {
+                                                "description": "Sector de donde se localiza el predio",
+                                                "type": "string",
+                                                "enum": [
+                                                    "Norte",
+                                                    "Sur",
+                                                    "Este",
+                                                    "Oeste"
+                                                ]
+                                            },
+                                            "Complemento": {
+                                                "description": "Complemento de la dirección",
+                                                "type": "string",
+                                                "maxLength": 255
+                                            },
+                                            "Nombre_Predio": {
+                                                "description": "Nombre del predio, ejemplo nombre de predios en sector rural",
+                                                "type": "string",
+                                                "maxLength": 255
+                                            }
+                                        },
+                                        "required": [
+                                            "Tipo_Direccion"
+                                        ]
+                                    }
+                                },
+                                "Referencia_Registral_Sistema_Antiguo": {
+                                    "description": "Estructura que permite incorporar referencias registrales del sistema antiguo",
+                                    "type": "object",
+                                    "properties": {
+                                        "Tipo_Referencia": {
+                                            "description": "Valores: Estructurada y No Estructurada",
+                                            "type": "string",
+                                            "enum": [
+                                                "Estructurada",
+                                                "No_Estructurada"
+                                            ]
+                                        },
+                                        "Oficina": {
+                                            "description": "Nombre de la oficina de registro de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 50
+                                        },
+                                        "Libro": {
+                                            "description": "Número del libro indicado en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 1
+                                        },
+                                        "Tomo": {
+                                            "description": "Número del tomo indicado en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 2
+                                        },
+                                        "Pagina": {
+                                            "description": "Página de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 4
+                                        },
+                                        "Numero": {
+                                            "description": "Número de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 4
+                                        },
+                                        "Dia": {
+                                            "description": "Día de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 2
+                                        },
+                                        "Mes": {
+                                            "description": "Mes de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 2
+                                        },
+                                        "Anio": {
+                                            "description": "Año de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 2
+                                        },
+                                        "Matricula": {
+                                            "description": "Número de la matrícula de la referencia registral sistema antiguo diligenciada en la ficha catastral",
+                                            "type": "string",
+                                            "maxLength": 20
+                                        }
+                                    },
+                                    "required": [
+                                        "Tipo_Referencia",
+                                        "Matricula"
+                                    ]
+                                },
+                                "Estado_FMI": {
+                                    "description": "Valores para indicar el estado del FMI del predio. Activo: luego de haber realizado un estudio a todas las transacciones registradas en el FMI se determina que existe un área actualizada sobre la cual se están ejerciendo derechos reales y se pueden seguir registrando anotaciones contentivas de negocios o actos jurídicos. Cerrado: hace referencia al estado del FMI al que no es posible hacerle anotaciones de negocios jurídicos, porque el área que identifica pasa a formar parte de un predio identificado con un folio diferente, ya sea por un englobe o por su total división o por decisión administrativa o judicial. Trasladado: FMI que cambia de Oficina de Registro, pasa a denominarse matrícula origen, se genera un nuevo FMI en la nueva Oficina de Registro de Instrumentos Públicos que se denomina matrícula destino. Custodia: corresponde a los FMI que se encuentran en custodia por una orden expresa dada por un juez de la República",
+                                    "type": "string",
+                                    "enum": [
+                                        "Activo",
+                                        "Cerrado",
+                                        "Trasladado",
+                                        "Custodia"
+                                    ]
+                                },
+                                "Fecha_Apertura_FMI": {
+                                    "description": "Fecha en la cual se abrió el folio de matrícula inmobiliaria",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "Matricula_Matriz": {
+                                    "description": "Corresponde a la información del código de la ORIP y el número de matrícula inmobiliaria de los predios por los cuales nació el predio objeto de estudio",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Codigo_ORIP": {
+                                                "description": "Número asignado a cada oficina de registro de acuerdo a su comprensión registra, para las ciudades donde haya más de una ORIP será alfanumérico",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            },
+                                            "Matricula_Inmobiliaria": {
+                                                "description": "Folio destinado a la inscripción de los actos, contratos y providencias relacionados en el artículo 4°, referente a un bien raíz, el cual se distinguirá con un código alfanumérico o complejo numeral indicativo del orden interno de cada oficina y de la sucesión en que se vaya sentando",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            }
+                                        }
+                                    }
+                                },
+                                "Matricula_Segregados": {
+                                    "description": "Corresponde a la información del código de la ORIP y el número de matrícula inmobiliaria de los predios por los cuales nació el predio objeto de estudio",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Codigo_ORIP": {
+                                                "description": "Número asignado a cada oficina de registro de acuerdo a su comprensión registral.",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            },
+                                            "Matricula_Inmobiliaria": {
+                                                "description": "Folio destinado a la inscripción de los actos, contratos y providencias relacionados en el artículo 4°, referente a un bien raíz, el cual se distinguirá con un código alfanumérico o complejo numeral indicativo del orden",
+                                                "type": "string",
+                                                "maxLength": 20
+                                            }
+                                        }
+                                    }
+                                },
+                                "Predio_Origen_NPN": {
+                                    "description": "Estructura que permite identificar el número predial nacional anterior a los cambios de renumeración producto de la adopción de la estructura definida por el IGAC y que permite mantener el historial del predio.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Numero_Predial_Nacional": {
+                                                "description": "Código numérico de treinta (30) dígitos, que se le asigna a cada predio para su identificación en la base de datos catastral de acuerdo con la estructura definida por el IGAC.",
+                                                "type": "string",
+                                                "maxLength": 30
+                                            },
+                                            "Fecha_Cambio_NPN": {
+                                                "description": "Fecha en la cual se cambió el Numero Predial Nacional.",
+                                                "type": "string",
+                                                "format": "date"
+                                            }
+                                        },
+                                        "required": [
+                                            "Numero_Predial_Nacional",
+                                            "Fecha_Cambio_NPN"
+                                        ]
+                                    }
+                                },
+                                "Predio_Matriz_NPN": {
+                                    "description": "Estructura que permite identificar el predio o los predios de los cuales proviene(n) nueva(s) unidad(es) predial(es) producto de segregación o agregación.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Numero_Predial_Nacional": {
+                                                "description": "Código numérico de treinta (30) dígitos, que se le asigna a cada predio para su identificación en la base de datos catastral de acuerdo con la estructura definida por el IGAC.",
+                                                "type": "string",
+                                                "maxLength": 30
+                                            },
+                                            "Area_Catastral_Terreno": {
+                                                "description": "Es el área del terreno inscrita en la base de datos catastral, de conformidad con el artículo 5.2.3. de la Resolución 1040 de 2023.",
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "Numero_Predial_Nacional",
+                                            "Area_Catastral_Terreno"
+                                        ]
+                                    }
+                                },
+                                "Fecha_Inscripcion_Catastral": {
+                                    "description": "Fecha de registro de los ingresos, modificaciones o cancelaciones en la base de datos catastral, de acuerdo con lo señalado en el título IV de la Resolución 1040 de 2023.",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "Tipo_Predio": {
+                                    "description": "Valores para indicar los tipos de predios",
+                                    "type": "string",
+                                    "enum": [
+                                        "Predio",
+                                        "Publico",
+                                        "Baldio",
+                                        "Fiscal_Patrimonial",
+                                        "Uso_Publico",
+                                        "Presunto_Baldio",
+                                        "Privado"
+                                    ]
+                                },
+                                "Condicion_Predio": {
+                                    "description": "Valores para indicar el tipo de condición de predio",
+                                    "type": "string",
+                                    "enum": [
+                                        "NPH",
+                                        "PH",
+                                        "PH_Matriz",
+                                        "PH_Unidad_Predial",
+                                        "Condominio",
+                                        "Condominio_Matriz",
+                                        "Condominio_Unidad_Predial",
+                                        "Parque_Cementerio",
+                                        "Parque_Cementerio_Matriz",
+                                        "Parque_Cementerio_Unidad_Predial",
+                                        "Via",
+                                        "Informal",
+                                        "Bien_Uso_Publico"
+                                    ]
+                                },
+                                "Destinacion_Economica": {
+                                    "description": "Clasificación que se da a cada inmueble en su conjunto -terreno y unidades de construcción-, en el momento de la identificación predial de conformidad con la actividad predominante que en él se desarrolle.",
+                                    "type": "string",
+                                    "enum": [
+                                        "Acuicola",
+                                        "Agricola",
+                                        "Agroindustrial",
+                                        "Agroforestal",
+                                        "Agropecuario",
+                                        "Comercial",
+                                        "Conservacion_Proteccion_Ambiental",
+                                        "Cultural",
+                                        "Educativo",
+                                        "Forestal_Productor",
+                                        "Habitacional",
+                                        "Industrial",
+                                        "Infraestructura_Asociada_Produccion_Agropecuaria",
+                                        "Infraestructura_Hidraulica",
+                                        "Infraestructura_Saneamiento_Basico",
+                                        "Infraestructura_Seguridad",
+                                        "Infraestructura_Transporte",
+                                        "Infraestructura_Energia_Renovable_Electrica",
+                                        "Institucional",
+                                        "Mineria_Hidrocarburos",
+                                        "Lote_Urbanizable_No_Urbanizado",
+                                        "Lote_Urbanizado_No_Construido",
+                                        "Lote_No_Urbanizable",
+                                        "Lote_Rural",
+                                        "Pecuario",
+                                        "Recreacional",
+                                        "Religioso",
+                                        "Salubridad",
+                                        "Servicios_Funerarios",
+                                        "Servicios_Sociales",
+                                        "Uso_Publico"
+                                    ]
+                                },
+                                "Avaluo": {
+                                    "description": "Estructura que contiene el avalúo del predio en la base de datos catastral",
+                                    "type": "array",
+                                    "minItems": 1,
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Fecha_Avaluo": {
+                                                "description": "Fecha de la realización del avalúo catastral",
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "Valor_Comercial": {
+                                                "description": "Precio más probable por el cual un predio se transaría en un mercado en donde el comprador y el vendedor actuarían libremente con el conocimiento de las condiciones físicas y jurídicas que afectan el bien, el cual debe contar con soporte económico acorde con la teoría de valor y su único fin es la determinación de los avalúos catastrales por parte de los gestores catastrales",
+                                                "type": "number"
+                                            },
+                                            "Avaluo_Catastral": {
+                                                "description": "Valor de un predio resultante de un ejercicio técnico en desarrollo de los procesos catastrales, que en ningún caso podrá ser inferior al 60% del valor comercial o superar el valor de este último",
+                                                "type": "number"
+                                            },
+                                            "Valor_Comercial_Terreno": {
+                                                "description": "Valor más probable por el cual se transaría el terreno en el mercado",
+                                                "type": "number"
+                                            },
+                                            "Avaluo_Catastral_Terreno": {
+                                                "description": "Avalúo catastral del terreno",
+                                                "type": "number"
+                                            },
+                                            "Valor_Comercial_Total_UnidadesConstruccion": {
+                                                "description": "Valor más probable por el cual se transarían las unidades constructivas en el mercado",
+                                                "type": "number"
+                                            },
+                                            "Avaluo_Catastral_Total_UnidadesConstruccion": {
+                                                "description": "Avalúo catastral de las unidades de construcción",
+                                                "type": "number"
+                                            },
+                                            "Autoestimacion": {
+                                                "description": "Derecho que tiene todo interesado de presentar antes del 30 de junio de cada año ante el correspondiente gestor catastral, la Secretaría de Hacienda municipal, distrital y/o quien haga sus veces, la estimación del avalúo catastral de su inmueble",
+                                                "type": "boolean"
+                                            },
+                                            "Incremento": {
+                                                "description": "Se deberá indicar si el predio tuvo aplicación de lo dispuesto en el artículo 49 de la ley 2294 del 2023 por el cual se expide el plan nacional de desarrollo 2022-2026 Colombia potencia mundial de la vida",
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "required": [
+                                            "Fecha_Avaluo",
+                                            "Avaluo_Catastral",
+                                            "Autoestimacion"
+                                        ]
+                                    }
+                                },
+                                "Procedimiento_Catastral_Registral": {
+                                    "description": "Procedimientos catastrales registrales asociados al predio",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "ProcedimientoCatastralRegistral": {
+                                                "description": "Tipo de procedimiento catastral registral aplicado al predio",
+                                                "type": "string",
+                                                "enum": [
+                                                    "Actualizacion_Linderos",
+                                                    "Rectificacion_Area",
+                                                    "Rectificacion_Linderos",
+                                                    "Inclusion_Cabida_Linderos",
+                                                    "Correccion_Inclusion_Procesos_OSPR",
+                                                    "Actualizacion_Masiva_Linderos",
+                                                    "Rectificacion_Masiva_Area"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "ProcedimientoCatastralRegistral"
+                                        ]
+                                    }
+                                },
+                                "Vigencia_Actualizacion_Catastral": {
+                                    "description": "Fecha en la que entró en vigencia el último proceso de actualización catastral.",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "Estado": {
+                                    "description": "Valores para indicar el estado del predio.",
+                                    "type": "string",
+                                    "enum": [
+                                        "Activo",
+                                        "Cancelado"
+                                    ]
+                                },
+                                "Alerta_Predio": {
+                                    "description": "Advertencia generada por entidades públicas sobre el predio",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Descripcion_Alerta": {
+                                                "description": "Descripción general de la alerta del predio en la base de datos catastral.",
+                                                "type": "string",
+                                                "maxLength": 255
+                                            },
+                                            "Entidad_Emisora_Alerta": {
+                                                "description": "Nombre de la entidad emisora del estado de alerta del predio.",
+                                                "type": "string",
+                                                "maxLength": 255
+                                            },
+                                            "Fecha_Apertura_Alerta": {
+                                                "description": "Fecha de apertura de la alerta emitida por la entidad competente o por el gestor catastral.",
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "Fecha_Cierre_Alerta": {
+                                                "description": "Fecha de cierre de la alerta emitida por la entidad competente o por el gestor catastral.",
+                                                "type": "string",
+                                                "format": "date"
+                                            }
+                                        },
+                                        "required": [
+                                            "Descripcion_Alerta",
+                                            "Entidad_Emisora_Alerta",
+                                            "Fecha_Apertura_Alerta"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "Departamento",
+                                "Municipio",
+                                "Numero_Predial_Nacional",
+                                "Codigo_Homologado",
+                                "Area_Catastral_Terreno",
+                                "Direccion",
+                                "Tipo_Predio",
+                                "Condicion_Predio",
+                                "Vigencia_Actualizacion_Catastral",
+                                "Avaluo",
+                                "Estado"
+                            ]
+                        },
+                        "required": [
+                            "Departamento",
+                            "Municipio",
+                            "Numero_Predial_Nacional",
+                            "Codigo_Homologado",
+                            "Area_Catastral_Terreno",
+                            "Direccion",
+                            "Tipo_Predio",
+                            "Condicion_Predio",
+                            "Vigencia_Actualizacion_Catastral",
+                            "Avaluo",
+                            "Estado"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "geometry",
+                    "attributes"
+                ]
+            }
+        ]
+    }
+}
+}
