@@ -299,13 +299,13 @@
                         "description": "Fecha en la cual se cambió el Numero Predial Nacional.",
                         "type": "string",
                         "format": "date"
-                    }
-                }
-            },
-            "required": [
-                "Numero_Predial_Nacional",
-                "Fecha_Cambio_NPN"
-            ]
+                    }                
+                },
+                "required": [
+                    "Numero_Predial_Nacional",
+                    "Fecha_Cambio_NPN"
+                ]
+            }            
         },
         "Predio_Matriz_NPN": {
             "description": "Estructura que permite identificar el predio o los predios de los cuales proviene(n) nueva(s) unidad(es) predial(es) producto de segregación o agregación.",
@@ -322,18 +322,19 @@
                         "description": "Es el área del terreno inscrita en la base de datos catastral, de conformidad con el artículo 5.2.3. de la Resolución 1040 de 2023.",
                         "type": "number"
                     }
-                }
-            },
-            "required": [
-                "Numero_Predial_Nacional"
-            ]
+                },
+                "required": [
+                    "Numero_Predial_Nacional",
+                    "Area_Catastral_Terreno"
+                ]
+            }            
         },
         "Fecha_Inscripcion_Catastral": {
             "description": "Fecha de registro de los ingresos, modificaciones o cancelaciones en la base de datos catastral, de acuerdo con lo señalado en el título IV de la Resolución 1040 de 2023.",
             "type": "string",
             "format": "date"
         },
-        "Tipo_predio": {
+        "Tipo_Predio": {
             "description": "Valores para indicar los tipos de predios",
             "type": "string",
             "enum": [
@@ -534,7 +535,7 @@
         "Codigo_Homologado",
         "Area_Catastral_Terreno",
         "Direccion",
-        "Tipo_predio",
+        "Tipo_Predio",
         "Condicion_Predio",
         "Vigencia_Actualizacion_Catastral",
         "Avaluo",
