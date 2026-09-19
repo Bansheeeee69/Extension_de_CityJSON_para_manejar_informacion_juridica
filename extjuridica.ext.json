@@ -40,7 +40,8 @@
                                     "maxLength": 4
                                 },
                                 "Matricula_Inmobiliaria": {
-                                    "type": "number",
+                                    "type": "string",
+                                    "maxLength": 20,
                                     "description": "Folio destinado a la inscripción de los actos, contratos y providencias relacionados en el artículo 4° de la Ley 1579 de 2012 “Por la cual se expide el estatuto de registro de instrumentos públicos y se dictan otras disposiciones”, referente a un bien raíz, el cual se distinguirá con un código alfanumérico o complejo numeral indicativo del orden interno de cada oficina de registro y de la sucesión en que se vaya sentando."
                                 },
                                 "Numero_Predial_Nacional": {
@@ -558,22 +559,10 @@
                                 "Condicion_Predio",
                                 "Vigencia_Actualizacion_Catastral",
                                 "Avaluo",
-                                "Estado"
+                                "Estado",
+                                "Destinacion_Economica"
                             ]
-                        },
-                        "required": [
-                            "Departamento",
-                            "Municipio",
-                            "Numero_Predial_Nacional",
-                            "Codigo_Homologado",
-                            "Area_Catastral_Terreno",
-                            "Direccion",
-                            "Tipo_Predio",
-                            "Condicion_Predio",
-                            "Vigencia_Actualizacion_Catastral",
-                            "Avaluo",
-                            "Estado"
-                        ]
+                        }                        
                     }
                 },
                 "required": [
