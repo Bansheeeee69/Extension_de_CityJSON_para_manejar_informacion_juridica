@@ -562,16 +562,15 @@
                                 "Estado",
                                 "Destinacion_Economica"
                             ]
-                        }                        
-                    }
-                },
-                "required": [
-                    "type",
-                    "geometry",
-                    "attributes"
-                ]
-            }
-        ]
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "geometry",
+                        "attributes"
+                    ]
+                }
+            ]
+        }
     }
-}
 }
